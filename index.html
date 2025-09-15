@@ -5,13 +5,13 @@
   <title>Kit de Ánimo 💌</title>
   <style>
     body {
-      background: linear-gradient(135deg, #f9d5e5, #d8b4e2);
+      background: linear-gradient(135deg, #fbb6ce, #c084fc); 
       display: flex;
       justify-content: center;
       align-items: center;
       height: 100vh;
       margin: 0;
-      font-family: 'Comic Sans MS', cursive, sans-serif;
+      font-family: Arial, sans-serif;
       flex-direction: column;
       overflow: hidden;
       position: relative;
@@ -76,7 +76,6 @@
       to { opacity: 1; transform: scale(1); }
     }
 
-    /* Estilo para los corazones */
     .heart {
       position: absolute;
       font-size: 20px;
@@ -125,29 +124,23 @@
       }, 1300);
     });
 
-    // Función para crear corazones flotantes
     function crearCorazon() {
       const heart = document.createElement("div");
       heart.classList.add("heart");
       heart.textContent = "💖";
 
-      // posición aleatoria horizontal
       heart.style.left = Math.random() * window.innerWidth + "px";
-      // duración aleatoria
       const duracion = 5 + Math.random() * 5;
       heart.style.animationDuration = duracion + "s";
-      // tamaño aleatorio
       heart.style.fontSize = 15 + Math.random() * 25 + "px";
 
       body.appendChild(heart);
 
-      // eliminar corazón después de la animación
       setTimeout(() => {
         heart.remove();
       }, duracion * 1000);
     }
 
-    // Crear corazones cada 300ms
     setInterval(crearCorazon, 300);
   </script>
 </body>
