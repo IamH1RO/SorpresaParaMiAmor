@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Kit de Ánimo 💌</title>
+  <style>
+    body {
+      background: linear-gradient(135deg, #f9d5e5, #d8b4e2);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      font-family: 'Comic Sans MS', cursive, sans-serif;
+      flex-direction: column;
+      overflow: hidden;
+      position: relative;
+    }
+
+    h1 {
+      color: #a84b84;
+      font-size: 2.5em;
+      margin-bottom: 40px;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+      z-index: 1;
+    }
+
+    .carta {
+      width: 300px;
+      height: 200px;
+      background: #f8d7e3;
+      border: 2px solid #e7a4c9;
+      border-radius: 10px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 20px;
+      color: #a84b84;
+      cursor: pointer;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      transition: transform 0.5s ease, box-shadow 0.5s ease;
+      position: relative;
+      z-index: 1;
+    }
+
+    .carta.zoom {
+      transform: scale(1.2);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+    }
+
+    .carta.abierta {
+      animation: abrir 0.8s forwards;
+    }
+
+    @keyframes abrir {
+      0% { transform: scale(1.2) rotateX(0deg); }
+      100% { transform: scale(1.2) rotateX(90deg); opacity: 0; }
+    }
+
+    .imagen {
+      display: none;
+      max-width: 80%;
+      max-height: 80%;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+      z-index: 1;
+    }
+
+    .imagen.visible {
+      display: block;
+      animation: fadeIn 1s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: scale(0.9); }
+      to { opacity: 1; transform: scale(1); }
+    }
+
+    /* Estilo para los corazones */
+    .heart {
+      position: absolute;
+      font-size: 20px;
+      color: #ff9ad9;
+      animation: floatUp linear infinite;
+      user-select: none;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    @keyframes floatUp {
+      0% {
+        transform: translateY(100vh) scale(0.5);
+        opacity: 0;
+      }
+      10% {
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(-20vh) scale(1);
+        opacity: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+  <h1>PARA MI AMORCITO 💖</h1>
+  <div class="carta" id="carta">💌 Abrir Carta</div>
+  <img src="kit.png" alt="Kit de Ánimo" class="imagen" id="imagen">
+
+  <script>
+    const carta = document.getElementById("carta");
+    const imagen = document.getElementById("imagen");
+    const body = document.body;
+
+    carta.addEventListener("click", () => {
+      carta.classList.add("zoom");
+
+      setTimeout(() => {
+        carta.classList.add("abierta");
+      }, 500);
+
+      setTimeout(() => {
+        carta.style.display = "none";
+        imagen.classList.add("visible");
+      }, 1300);
+    });
+
+    // Función para crear corazones flotantes
+    function crearCorazon() {
+      const heart = document.createElement("div");
+      heart.classList.add("heart");
+      heart.textContent = "💖";
+
+      // posición aleatoria horizontal
+      heart.style.left = Math.random() * window.innerWidth + "px";
+      // duración aleatoria
+      const duracion = 5 + Math.random() * 5;
+      heart.style.animationDuration = duracion + "s";
+      // tamaño aleatorio
+      heart.style.fontSize = 15 + Math.random() * 25 + "px";
+
+      body.appendChild(heart);
+
+      // eliminar corazón después de la animación
+      setTimeout(() => {
+        heart.remove();
+      }, duracion * 1000);
+    }
+
+    // Crear corazones cada 300ms
+    setInterval(crearCorazon, 300);
+  </script>
+</body>
+</html>
